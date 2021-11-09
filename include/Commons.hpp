@@ -19,6 +19,7 @@ enum class Figure
     BBishop,
     BQueen,
     BKing,
+    Empty
 };
 
 constexpr int BOARD_SIZE = 8;

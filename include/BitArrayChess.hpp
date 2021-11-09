@@ -1,6 +1,6 @@
 #pragma once
 #include "Chess.hpp"
 
-class BitArrayChess : public Chess
-{
-};
+//class BitArrayChess : public Chess
+//{
+//};

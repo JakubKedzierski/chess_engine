@@ -4,7 +4,8 @@
 class Chess
 {
 public:
-    void move(std::string &);
-    bool isPossibleMove(std::string &);
-    Board getBoard();
+    virtual ~Chess() = default;
+    virtual void move(std::string &) = 0;
+    virtual bool isPossibleMove(std::string &) = 0;
+    virtual Board getBoard() = 0;
 };
