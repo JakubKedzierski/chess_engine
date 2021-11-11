@@ -17,8 +17,19 @@ Board SimpleArrayChess::getBoard()
     return this->board;
 }
 
-void SimpleArrayChess::move(std::string &)
+void SimpleArrayChess::move(int x, int y)
 {
+}
+
+void SimpleArrayChess::move(std::string &moveEncoding)
+{
+    //King, Queen, Rook, Bishop, kNight
+    const auto moveEncodingSize = moveEncoding.size();
+    if (moveEncodingSize == 2)
+    {
+        const auto column = static_cast<int>(moveEncoding[0]) - 96;
+        const auto row = static_cast<int>(moveEncoding[1]) - 48;
+    }
 }
 
 bool SimpleArrayChess::isPossibleMove(std::string &)

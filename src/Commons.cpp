@@ -1,4 +1,3 @@
-#pragma once
 #include "Commons.hpp"
 
 std::wstring figureToString(Figure figure)
