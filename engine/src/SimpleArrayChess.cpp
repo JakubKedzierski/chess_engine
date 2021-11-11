@@ -27,8 +27,8 @@ void SimpleArrayChess::move(std::string &moveEncoding)
     const auto moveEncodingSize = moveEncoding.size();
     if (moveEncodingSize == 2)
     {
-        const auto column = static_cast<int>(moveEncoding[0]) - 96;
-        const auto row = static_cast<int>(moveEncoding[1]) - 48;
+        const auto column = static_cast<int>(moveEncoding[0]) - 96 - 1;
+        const auto row = static_cast<int>(moveEncoding[1]) - 48 - 1;
     }
 }
 

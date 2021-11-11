@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.5)
 project(JacoboBot LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-Wall)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-file(GLOB SOURCES "src/*.cpp")
-add_executable(JacoboBot ${SOURCES})
-target_include_directories(JacoboBot PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+add_subdirectory(googletest)
+add_subdirectory(engine)
+add_subdirectory(tests)
+

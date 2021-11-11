@@ -10,4 +10,5 @@ int main()
 
     std::string move = "h3";
     chess->move(move);
+
 }
