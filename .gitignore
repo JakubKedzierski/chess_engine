@@ -1,2 +1,3 @@
 build/
 .vscode/extensions.json
+.vscode/c_cpp_properties.json

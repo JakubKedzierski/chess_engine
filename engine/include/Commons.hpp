@@ -22,6 +22,12 @@ enum class Figure
     Empty
 };
 
+enum class Turn
+{
+    White,
+    Black
+};
+
 constexpr int BOARD_SIZE = 8;
 using Board = std::array<std::array<Figure, BOARD_SIZE>, BOARD_SIZE>;
 
