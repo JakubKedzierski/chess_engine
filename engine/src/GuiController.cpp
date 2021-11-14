@@ -11,3 +11,15 @@ void GuiController::printBoardToConsole(Board board)
         std::wcout << std::endl;
     }
 }
+
+void GuiController::gameLoop()
+{
+
+    while (true)
+    {
+        printBoardToConsole(chess.getBoard());
+        std::string move;
+        std::cin >> move;
+        chess.move(move);
+    }
+}

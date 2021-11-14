@@ -22,10 +22,24 @@ enum class Figure
     Empty
 };
 
+enum class NotationType
+{
+    English,
+    Polish
+};
+
 enum class Turn
 {
     White,
     Black
+};
+
+struct Move
+{
+    int row1 = -1;
+    int column1 = -1;
+    int row2 = -1;
+    int column2 = -1;
 };
 
 constexpr int BOARD_SIZE = 8;
