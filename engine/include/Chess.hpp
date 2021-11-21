@@ -6,6 +6,5 @@ class Chess
 public:
     virtual ~Chess() = default;
     virtual void move(std::string &) = 0;
-    virtual bool isPossibleMove(std::string &) = 0;
     virtual Board getBoard() = 0;
 };

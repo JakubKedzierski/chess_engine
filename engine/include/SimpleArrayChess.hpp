@@ -14,6 +14,7 @@ private:
     bool isInBoundries(int row, int column);
     Move decodeKnightMove(const std::string &moveEncoding);
     Move decodePawnMove(const std::string &moveEncoding);
+    Move decodeRookMove(const std::string &moveEncoding);
 
 public:
     Board getBoard() override;
@@ -21,6 +22,5 @@ public:
     Figure getFigure(const std::string &) const;
     void move(std::string &moveEncoding) override;
     void move(int x1, int y1, int x2, int y2);
-    bool isPossibleMove(std::string &) override;
     SimpleArrayChess();
 };

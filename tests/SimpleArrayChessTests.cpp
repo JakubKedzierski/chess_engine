@@ -29,6 +29,12 @@ TEST(AlgebricNotationMoves, TestCasualPawnMoves)
     move = "h4";
     chess.move(move);
     ASSERT_EQ(chess.getFigure("h4"), Figure::WPawn);
+
+    move = "g5";
+    chess.move(move);
+    move = "hxg5";
+    chess.move(move);
+    ASSERT_EQ(chess.getFigure("g5"), Figure::WPawn);
 }
 
 TEST(AlgebricNotationMoves, TestCasualKnightMoves)

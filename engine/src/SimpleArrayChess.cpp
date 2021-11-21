@@ -21,7 +21,6 @@ Board SimpleArrayChess::getBoard()
 
 Figure SimpleArrayChess::getFigure(const int column, const int row) const
 {
-    // row - 1,2,3 column - a,b,c
     return this->board[row][column];
 }
 
@@ -154,6 +153,17 @@ Move SimpleArrayChess::decodePawnMove(const std::string &moveEncoding)
     }
     else
     {
+        move.column2 = static_cast<int>(moveEncoding[2]) - 96 - 1;
+        move.row2 = static_cast<int>(moveEncoding[3]) - 48 - 1;
+        move.column1 = static_cast<int>(moveEncoding[0]) - 96 - 1;
+        if (turn == Turn::White)
+        {
+            move.row1 = move.row2 - 1;
+        }
+        else
+        {
+            move.row1 = move.row2 + 1;
+        }
     }
 
     if (turn == Turn::White && board[move.row2 - 1][move.column2] == Figure::WPawn)
@@ -196,10 +206,10 @@ void SimpleArrayChess::move(std::string &moveEncoding) // should throw invalid a
         move = this->decodeKnightMove(moveEncoding);
     }
 
-    this->move(move.column1, move.row1, move.column2, move.row2);
-}
+    if (moveEncoding.find("W") != std::string::npos)
+    {
+        move = this->decodeKnightMove(moveEncoding);
+    }
 
-bool SimpleArrayChess::isPossibleMove(std::string &)
-{
-    return true;
+    this->move(move.column1, move.row1, move.column2, move.row2);
 }
