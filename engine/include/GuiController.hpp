@@ -4,14 +4,16 @@
 #include <iomanip>
 #include <io.h>
 #include <fcntl.h>
+#include "ChessNotation.hpp"
 
 class GuiController
 {
 private:
-    SimpleArrayChess chess;
+    std::shared_ptr<SimpleArrayChess> chess;
+    ChessNotation notation;
 
 public:
-    GuiController() = default;
+    GuiController();
     void printBoardToConsole(Board board);
     void gameLoop();
 };

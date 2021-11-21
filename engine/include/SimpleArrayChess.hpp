@@ -1,26 +1,23 @@
 #pragma once
-#include "Chess.hpp"
 #include <vector>
 #include <utility>
 #include <sstream>
+#include "Commons.hpp"
 
-class SimpleArrayChess : public Chess
+class SimpleArrayChess
 {
 private:
     Board board;
     Turn turn;
-    NotationType notationType;
     inline void turnChange();
-    bool isInBoundries(int row, int column);
-    Move decodeKnightMove(const std::string &moveEncoding);
-    Move decodePawnMove(const std::string &moveEncoding);
-    Move decodeRookMove(const std::string &moveEncoding);
 
 public:
-    Board getBoard() override;
+    Board getBoard();
     Figure getFigure(const int x, const int y) const;
     Figure getFigure(const std::string &) const;
-    void move(std::string &moveEncoding) override;
+    Turn getTurn();
+    bool isInBoundries(int row, int column);
     void move(int x1, int y1, int x2, int y2);
+    void move(const Move &move);
     SimpleArrayChess();
 };

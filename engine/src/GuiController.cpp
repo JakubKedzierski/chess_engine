@@ -1,5 +1,11 @@
 #include "GuiController.hpp"
 
+GuiController::GuiController() : notation()
+{
+    chess = std::make_shared<SimpleArrayChess>();
+    notation.setChessState(chess);
+}
+
 void GuiController::printBoardToConsole(Board board)
 {
     for (int i = BOARD_SIZE - 1; i >= 0; i--)
@@ -17,9 +23,9 @@ void GuiController::gameLoop()
 
     while (true)
     {
-        printBoardToConsole(chess.getBoard());
+        printBoardToConsole(chess->getBoard());
         std::string move;
         std::cin >> move;
-        chess.move(move);
+        chess->move(notation.decodeMove(move));
     }
 }
