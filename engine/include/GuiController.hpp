@@ -15,5 +15,5 @@ private:
 public:
     GuiController();
     void printBoardToConsole(Board board);
-    void gameLoop();
+    void gameLoop(int argc, char *argv[]);
 };

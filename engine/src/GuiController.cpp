@@ -18,9 +18,8 @@ void GuiController::printBoardToConsole(Board board)
     }
 }
 
-void GuiController::gameLoop()
+void GuiController::gameLoop(int argc, char *argv[])
 {
-
     while (true)
     {
         printBoardToConsole(chess->getBoard());
@@ -28,4 +27,5 @@ void GuiController::gameLoop()
         std::cin >> move;
         chess->move(notation.decodeMove(move));
     }
+
 }

@@ -1,3 +1,7 @@
 build/
 .vscode/extensions.json
 .vscode/c_cpp_properties.json
+engine/resources/chess_board.qrc
+engine/resources/nice_board.png
+.gitignore
+CMakeLists.txt.user
