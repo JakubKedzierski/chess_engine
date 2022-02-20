@@ -19,3 +19,5 @@ public:
     void setChessState(std::shared_ptr<SimpleArrayChess> chess);
     Move decodeMove(const std::string &moveEncoding);
 };
+
+// make it simpler -> one function decodeMove with board pointer as argument

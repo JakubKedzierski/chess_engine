@@ -17,9 +17,8 @@ Move ChessNotation::decodeMove(const std::string &moveEncoding)
 
     if (moveEncodingSize == 2)
     {
-        move = this->decodePawnMove(moveEncoding); //e.g e4
+        move = this->decodePawnMove(moveEncoding); // e.g e4
     }
-
     if (moveEncoding.find("S") != std::string::npos)
     {
         move = this->decodeKnightMove(moveEncoding);
@@ -30,12 +29,15 @@ Move ChessNotation::decodeMove(const std::string &moveEncoding)
     }
     else if (moveEncoding.find("G") != std::string::npos)
     {
+        move = this->decodeBishopMove(moveEncoding);
     }
     else if (moveEncoding.find("H") != std::string::npos)
     {
+        move = this->decodeQueenMove(moveEncoding);
     }
     else if (moveEncoding.find("K") != std::string::npos)
     {
+        move = this->decodeKingMove(moveEncoding);
     }
     else if (moveEncodingSize == 4 && (moveEncoding.find("x") != std::string::npos))
     {
@@ -46,15 +48,61 @@ Move ChessNotation::decodeMove(const std::string &moveEncoding)
 
 Move ChessNotation::decodeQueenMove(const std::string &moveEncoding)
 {
-    return {};
+    const auto turn = chess->getTurn();
+    const auto board = chess->getBoard();
+    Move move;
+
+    for (int i = 0; i < board.size(); i++)
+    {
+        for (int j = 0; j < board.size(); j++)
+        {
+            if ((board[i][j] == Figure::WQueen && turn == Turn::White) || (board[i][j] == Figure::BQueen && turn == Turn::Black))
+            {
+                move.column1 = j;
+                move.row1 = i;
+            }
+        }
+    }
+
+    if (moveEncoding.size() == 3)
+    {
+        move.column2 = static_cast<int>(moveEncoding[1]) - 96 - 1;
+        move.row2 = static_cast<int>(moveEncoding[2]) - 48 - 1;
+    }
+    else
+    {
+        move.column2 = static_cast<int>(moveEncoding[2]) - 96 - 1;
+        move.row2 = static_cast<int>(moveEncoding[3]) - 48 - 1;
+    }
+    return move;
 }
 
 Move ChessNotation::decodeBishopMove(const std::string &moveEncoding)
 {
-    return {};
+    const auto turn = chess->getTurn();
+    const auto board = chess->getBoard();
+    Move move;
+
+    if (moveEncoding.size() == 3)
+    {
+        move.column2 = static_cast<int>(moveEncoding[1]) - 96 - 1;
+        move.row2 = static_cast<int>(moveEncoding[2]) - 48 - 1;
+    }
+    else // e.g Gxb3
+    {
+        move.column2 = static_cast<int>(moveEncoding[2]) - 96 - 1;
+        move.row2 = static_cast<int>(moveEncoding[3]) - 48 - 1;
+    }
+
+    return move;
 }
 
 Move ChessNotation::decodeRookMove(const std::string &moveEncoding)
+{
+    return {};
+}
+
+Move ChessNotation::decodeKingMove(const std::string &moveEncoding)
 {
     return {};
 }

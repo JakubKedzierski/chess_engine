@@ -36,8 +36,8 @@ enum class Turn
 
 struct Move
 {
-    int row1 = -1;
-    int column1 = -1;
+    int row1 = -1; //
+    int column1 = -1; // a,b,c,d
     int row2 = -1;
     int column2 = -1;
 };

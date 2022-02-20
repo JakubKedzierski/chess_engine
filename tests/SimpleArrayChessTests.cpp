@@ -2,6 +2,8 @@
 #include "SimpleArrayChess.hpp"
 #include "ChessNotation.hpp"
 
+// AlgebricNotationMoves should not test moves that are on board but moves translated to numeric notation
+
 TEST(AlgebricNotationMoves, TestCasualPawnMoves)
 {
     ChessNotation notation;
@@ -82,4 +84,70 @@ TEST(AlgebricNotationMoves, TestCasualKnightMoves)
     ASSERT_EQ(chess->getFigure("c3"), Figure::Empty);
     ASSERT_EQ(chess->getFigure("e5"), Figure::Empty);
     ASSERT_EQ(chess->getFigure("e4"), Figure::Empty);
+}
+
+TEST(AlgebricNotationMoves, TestQueenMoves)
+{
+    ChessNotation notation;
+    std::shared_ptr<SimpleArrayChess> chess = std::make_shared<SimpleArrayChess>();
+    notation.setChessState(chess);
+
+    std::string move = "e4";
+    chess->move(notation.decodeMove(move));
+    move = "e6";
+    chess->move(notation.decodeMove(move));
+    move = "Hg4";
+    chess->move(notation.decodeMove(move));
+    ASSERT_EQ(chess->getFigure("g4"), Figure::WQueen);
+    ASSERT_EQ(chess->getFigure("d1"), Figure::Empty);
+
+    move = "Hg5";
+    chess->move(notation.decodeMove(move));
+    ASSERT_EQ(chess->getFigure("g5"), Figure::BQueen);
+
+    move = "Hxg5";
+    chess->move(notation.decodeMove(move));
+    ASSERT_EQ(chess->getFigure("g5"), Figure::WQueen);
+    ASSERT_EQ(chess->getFigure("g4"), Figure::Empty);
+
+    // double queen uncertanity
+}
+
+TEST(AlgebricNotationMoves, TestQueenMoves)
+{
+    ChessNotation notation;
+    std::shared_ptr<SimpleArrayChess> chess = std::make_shared<SimpleArrayChess>();
+    notation.setChessState(chess);
+
+    std::string move = "e4";
+    chess->move(notation.decodeMove(move));
+    move = "e5";
+    chess->move(notation.decodeMove(move));
+
+    move = "Gc4";
+    chess->move(notation.decodeMove(move));
+    ASSERT_EQ(chess->getFigure("c4"), Figure::WBishop);
+    ASSERT_EQ(chess->getFigure("f1"), Figure::Empty);
+
+    move = "Gc5";
+    chess->move(notation.decodeMove(move));
+    ASSERT_EQ(chess->getFigure("c5"), Figure::BBishop);
+    ASSERT_EQ(chess->getFigure("f8"), Figure::Empty);
+
+    move = "d4";
+    chess->move(notation.decodeMove(move));
+
+    move = "Gxd4";
+    chess->move(notation.decodeMove(move));
+    ASSERT_EQ(chess->getFigure("d4"), Figure::BBishop);
+    ASSERT_EQ(chess->getFigure("c5"), Figure::Empty);
+
+    move = "Ge3";
+    chess->move(notation.decodeMove(move));
+    ASSERT_EQ(chess->getFigure("e3"), Figure::WBishop);
+    ASSERT_EQ(chess->getFigure("c1"), Figure::Empty);
+
+    move = "Gxe3";
+    chess->move(notation.decodeMove(move));
+    ASSERT_EQ(chess->getFigure("e3"), Figure::BBishop);
 }

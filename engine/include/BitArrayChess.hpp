@@ -1,5 +1,3 @@
 #pragma once
 
-//class BitArrayChess : public Chess
-//{
-//};
+// saving chess board as 64-bit words
