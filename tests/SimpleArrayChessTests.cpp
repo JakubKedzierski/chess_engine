@@ -3,16 +3,47 @@
 #include "ChessNotation.hpp"
 
 // AlgebricNotationMoves should not test moves that are on board but moves translated to numeric notation
+// one test for game, more tests for notation
 
 TEST(AlgebricNotationMoves, TestCasualPawnMoves)
 {
     ChessNotation notation;
     std::shared_ptr<SimpleArrayChess> chess = std::make_shared<SimpleArrayChess>();
     notation.setChessState(chess);
-    ASSERT_EQ(chess->getFigure(4, 1), Figure::WPawn);
-    ASSERT_EQ(chess->getFigure("e2"), Figure::WPawn);
+
+    std::string move = "e4";
+    Move lhs = notation.decodeMove(move);
+    Move rhs{.column1 = 4, .row1 = 1, .column2 = 4, .row2 = 3};
+    ASSERT_EQ(lhs, rhs);
+    chess->move(lhs);
+
+    move = "e5";
+    lhs = notation.decodeMove(move);
+    rhs = Move{.column1 = 4, .row1 = 6, .column2 = 4, .row2 = 4};
+    ASSERT_EQ(lhs, rhs);
+    chess->move(lhs);
+
+    move = "f4";
+    lhs = notation.decodeMove(move);
+    rhs = Move{.column1 = 5, .row1 = 1, .column2 = 5, .row2 = 3};
+    ASSERT_EQ(lhs, rhs);
+    chess->move(lhs);
+
+    move = "exf4";
+    lhs = notation.decodeMove(move);
+    rhs = Move{.column1 = 4, .row1 = 4, .column2 = 5, .row2 = 3};
+    ASSERT_EQ(lhs, rhs);
+}
+
+TEST(SimpleChessTestsSuite, TestCasualPawnMoves)
+{
+    ChessNotation notation;
+    std::shared_ptr<SimpleArrayChess> chess = std::make_shared<SimpleArrayChess>();
+    notation.setChessState(chess);
+
     std::string move = "e4";
     chess->move(notation.decodeMove(move));
+
     ASSERT_EQ(chess->getFigure("e4"), Figure::WPawn);
     ASSERT_EQ(chess->getFigure("e2"), Figure::Empty);
 
@@ -113,7 +144,7 @@ TEST(AlgebricNotationMoves, TestQueenMoves)
     // double queen uncertanity
 }
 
-TEST(AlgebricNotationMoves, TestQueenMoves)
+TEST(AlgebricNotationMoves, TestBishopMoves)
 {
     ChessNotation notation;
     std::shared_ptr<SimpleArrayChess> chess = std::make_shared<SimpleArrayChess>();

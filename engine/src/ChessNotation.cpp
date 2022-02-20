@@ -52,9 +52,9 @@ Move ChessNotation::decodeQueenMove(const std::string &moveEncoding)
     const auto board = chess->getBoard();
     Move move;
 
-    for (int i = 0; i < board.size(); i++)
+    for (int i = 0; i < BOARD_SIZE; i++)
     {
-        for (int j = 0; j < board.size(); j++)
+        for (int j = 0; j < BOARD_SIZE; j++)
         {
             if ((board[i][j] == Figure::WQueen && turn == Turn::White) || (board[i][j] == Figure::BQueen && turn == Turn::Black))
             {
@@ -92,6 +92,54 @@ Move ChessNotation::decodeBishopMove(const std::string &moveEncoding)
     {
         move.column2 = static_cast<int>(moveEncoding[2]) - 96 - 1;
         move.row2 = static_cast<int>(moveEncoding[3]) - 48 - 1;
+    }
+
+    int sum = move.column2 + move.row2; // even sum -> black, odd sum white
+    bool isBlackField = sum % 2 == 0;
+
+    for (int i = 0; i < BOARD_SIZE; i++)
+    {
+        for (int j = 0; j < BOARD_SIZE; j++)
+        {
+            if (turn == Turn::White)
+            {
+                if (isBlackField)
+                {
+                    if (board[i][j] == Figure::WBishop && ((i + j) % 2 == 0))
+                    {
+                        move.column1 = j;
+                        move.row1 = i;
+                    }
+                }
+                else
+                {
+                    if (board[i][j] == Figure::WBishop && ((i + j) % 2 == 1))
+                    {
+                        move.column1 = j;
+                        move.row1 = i;
+                    }
+                }
+            }
+            else
+            {
+                if (isBlackField)
+                {
+                    if (board[i][j] == Figure::BBishop && ((i + j) % 2 == 0))
+                    {
+                        move.column1 = j;
+                        move.row1 = i;
+                    }
+                }
+                else
+                {
+                    if (board[i][j] == Figure::BBishop && ((i + j) % 2 == 1))
+                    {
+                        move.column1 = j;
+                        move.row1 = i;
+                    }
+                }
+            }
+        }
     }
 
     return move;
